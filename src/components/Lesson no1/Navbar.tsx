@@ -4,6 +4,21 @@ import Bars from "../../img/navbarimg/hamburger-menu-icon.webp";
 
 export const Navbar = () => {
   const [nav, setnav] = useState(false);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+  const handleButtonClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const fileList = event.target.files;
+    if (fileList) {
+      console.log("File uploaded:", fileList[0]);
+      // You can perform further actions here, like uploading the file
+    }
+  };
   return (
     <>
       <div className=" align-middle p-[10%] shadow-xl bg-slate-50 flex fixed justify-between md:justify-around w-full sm:p-[2%]">
@@ -47,8 +62,16 @@ export const Navbar = () => {
 
             <div className="bg-[#E93740]   cursor-pointer flex justify-between p-[5%]  w-[120px]  rounded-2xl text-white ">
               <div>
-                <span>
-                  <i className="fa-duotone fa-plus"></i> Post Listing
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  style={{ display: "none" }}
+                />
+                <span className="bg-[#E93740] cursor-pointer p-[5%] rounded-2xl text-white">
+                  <button onClick={handleButtonClick}>
+                    <i className="fa-duotone fa-plus"></i> Post Listing
+                  </button>
                 </span>
               </div>
             </div>
@@ -71,8 +94,6 @@ export const Navbar = () => {
         <br />
         <br />
         <br />
-      
-     
       </div>
 
       {nav ? (
@@ -110,8 +131,16 @@ export const Navbar = () => {
             <i className="fa-regular fa-user text-[#E93740]"></i>
             <span className="text-[#E93740]  ">Sign in</span>
             <br /> <br /> <br />
-            <span className="bg-[#E93740]  cursor-pointer  p-[5%]   rounded-2xl text-white">
-              <i className="fa-duotone fa-plus"></i> Post Listing
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              style={{ display: "none" }}
+            />
+            <span className="bg-[#E93740] cursor-pointer p-[5%] rounded-2xl text-white">
+              <button onClick={handleButtonClick}>
+                <i className="fa-duotone fa-plus"></i> Post Listing
+              </button>
             </span>
           </div>
         </div>
